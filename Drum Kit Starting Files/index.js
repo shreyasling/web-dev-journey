@@ -4,12 +4,21 @@ for(var i=0;i<noofbuttons;i++){
     document.querySelectorAll(".drum")[i].addEventListener("click",handleClick);
 
 }
+document.addEventListener("keydown",function(event){
+    makesound(event.key);
+    btnanimation(event.key)
+})
 
 
 
 function handleClick(){
     var button=this.innerHTML;
-    switch (button) {
+    makesound(button);
+    btnanimation(button)
+    
+}
+function makesound(key){
+    switch (key) {
         case "w":
             var audio=new Audio('sounds/tom-1.mp3');
     audio.play();
@@ -41,9 +50,14 @@ function handleClick(){
             
             break;
     
-        default:
+        default:alert("press correct buttton!")
             break;
     }
-    
 }
-
+function btnanimation(a){
+    var activebtn=document.querySelector("."+a);
+    activebtn.classList.add("pressed");
+    setTimeout(() => {
+        activebtn.classList.remove("pressed")
+    }, 100);
+}
